@@ -1,7 +1,7 @@
     [server]
-    url          = "http://103.143.40.230:8081/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGYzNDM3YjQxYTQ3ODE5NWRkM2Q0ZSIsIm5lciI6ItCRLtCR0Y_QvNCx0LDRhtC-0LPRgiIsImJhaWd1dWxsYWdpaW5JZCI6IjY3MGYzNDM3YjQxYTQ3ODE5NWRkM2Q0YiIsImlhdCI6MTc3Mzk3MjA0Nn0.fHWCQTES9pzNiEMz1eGDZgrnrfCc9I013TNCCRck9BM"
-    barilgiinId  = "670f3437b41a478195dd3d4c"
+    url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGNmN2U0MTU0ODBkYWQyY2I0ZmRlZSIsIm5lciI6ItCm0Y3Qs9C80Y3QtCIsImJhaWd1dWxsYWdpaW5JZCI6IjY1OGNmN2U0MTU0ODBkYWQyY2I0ZmRlYyIsImlhdCI6MTc3NDIzMTQ4MX0.FSgL-3UtSPst5n5_JXiMzD9DyeaDye3CMIEzhrkVboo"
+    barilgiinId  = "658d2a0488afdbb4feaf191e"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,16 +11,16 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Нийслэл худалдааны төв"
+    org_name = "Шөнийн зах"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "172.16.18.119"
-    password = "Admin123"
+    ip       = "172.16.17.214"
+    password = "mongol123"
     http_port = 80
     gate = "entrance"
     [[cameras]]
-    ip       = "172.16.18.120"
-    password = "Admin123"
+    ip       = "172.16.17.215"
+    password = "mongol123"
     http_port = 80
     gate = "exit"
