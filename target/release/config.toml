@@ -1,7 +1,7 @@
     [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmM3NjJhZTI2ZmM1NDE0ZjFhYmUyOCIsIm5lciI6ItCl0KXQmiIsImJhaWd1dWxsYWdpaW5JZCI6IjY4NmM3NjJhZTI2ZmM1NDE0ZjFhYmUyNCIsImlhdCI6MTc3NDMyMjk3NH0.KZTu-3vvwCExTgklvryaKOfBidRYwR2ssap3FEXuDCU"
-    barilgiinId  = "686c762ae26fc5414f1abe25"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MmRhZTc5MjZhNDI0OGYxMDY3N2ZiMyIsIm5lciI6ItCh0KXQlC3QuNC50L0g0LfQvtCz0YHQvtC-0LsiLCJiYWlndXVsbGFnaWluSWQiOiI2NzJkYWU3OTI2YTQyNDhmMTA2NzdmYjAiLCJpYXQiOjE3NzQzMjQ3MDB9.oFaWLynO6ZgexQzA-LsN0WfRRx_CBfPdFAKO9UnIxso"
+    barilgiinId  = "672dae7926a4248f10677fb1"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,24 +11,31 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Bishrelt hotel"
+    org_name = "Төлбөртэй зогсоол"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.89.182"
-    password = "admin123"
+    ip       = "172.16.18.123"
+    password = "Admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
     [[cameras]]
-    ip       = "192.168.89.181"
-    password = "admin123"
+    ip       = "172.16.18.124"
+    password = "Admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
     [[cameras]]
-    ip       = "192.168.89.180"
-    password = "admin123"
+    ip       = "172.16.18.125"
+    password = "Admin123"
     http_port = 443
     gate = "exit"
     sambar_type = "sambar"
+    [[cameras]]
+    ip       = "172.16.18.126"
+    password = "Admin123"
+    http_port = 443
+    gate = "exit"
+    sambar_type = "sambar"
+    
