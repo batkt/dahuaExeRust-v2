@@ -1,7 +1,7 @@
     [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWZmY2E4NDcyNzQxZDRkODQ5YzdlZSIsIm5lciI6ImtoYXJraG9ydW0gYjEiLCJiYWlndXVsbGFnaWluSWQiOiI2OTMxMjM0OWRjZmJlNjJmNzFkYjQ0YTgiLCJpYXQiOjE3NzQ0MDE5MzZ9.yPfogIv64o-wGmJjRdyQEQvqMFlL4Z87V-5JkchCCpI"
-    barilgiinId  = "69312349dcfbe62f71db44a9"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OGFmZmVlODJjNGUxZTY2NjIyNzhlZSIsIm5lciI6ItCV0YDTqdOp0LvRgiIsImJhaWd1dWxsYWdpaW5JZCI6IjY5ODQwMmUyNmJiM2U5NGI1NjY1YmZlNCIsImlhdCI6MTc3NDQyNDA5MH0.fT-aSJJ_CI5Sc8QAzeBPc4WZM_6nXErB1PuYRnmaJLQ"
+    barilgiinId  = "698402e26bb3e94b5665bfe5"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,29 +11,18 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Хархорум плаза"
+    org_name = "Улаанбаатар буян"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "172.16.19.130"
+    ip       = "172.16.19.195"
     password = "admin123"
-    http_port = 443
+    http_port = 80
     gate = "entrance"
     sambar_type = "sambar"
+    
     [[cameras]]
-    ip       = "172.16.19.134"
-    password = "admin123"
-    http_port = 443
-    gate = "entrance"
-    sambar_type = "sambar"
-    [[cameras]]
-    ip       = "172.16.19.132"
-    password = "admin123"
-    http_port = 443
-    gate = "exit"
-    sambar_type = "sambar"
-    [[cameras]]
-    ip       = "172.16.19.131"
+    ip       = "172.16.19.196"
     password = "admin123"
     http_port = 443
     gate = "exit"

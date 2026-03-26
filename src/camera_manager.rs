@@ -114,7 +114,7 @@ impl CameraManager {
             .and_then(|c| c.http_port)
     }
     pub fn connect_all(&self) {
-        let sdk = match DahuaSdk::load() { Ok(s) => s, Err(e) => { error!("{e}"); return; } };
+        let sdk = match DahuaSdk::load() { Ok(s) => s, Err(_) => return };
 
         let mut map  = self.handle_map.lock().unwrap();
         let mut cams = self.cameras.lock().unwrap();
@@ -212,15 +212,20 @@ impl CameraManager {
         .unwrap_or_else(|| "sambar".to_string())
 }
     pub fn heartbeat(&self) {
-    let sdk = match DahuaSdk::load() { Ok(s) => s, Err(_) => return };
     let cams = self.cameras.lock().unwrap().clone();
+    let mut needs_reconnect = false;
+
     for cam in &cams {
         if cam.handle.is_null() {
             println!("Холбоот байсангүй — дахин холбож байна ({})", cam.ip);
-            self.connect_all();
-            return;
+            needs_reconnect = true;
+        } else {
+            println!("Холбоот байна ({})", cam.ip);
         }
-        println!("Холбоот байна ({})", cam.ip);
+    }
+
+    if needs_reconnect {
+        self.reconnect_all();
     }
 }
 
