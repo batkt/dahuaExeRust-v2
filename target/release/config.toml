@@ -1,7 +1,7 @@
     [server]
-    url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OGFmZmVlODJjNGUxZTY2NjIyNzhlZSIsIm5lciI6ItCV0YDTqdOp0LvRgiIsImJhaWd1dWxsYWdpaW5JZCI6IjY5ODQwMmUyNmJiM2U5NGI1NjY1YmZlNCIsImlhdCI6MTc3NDQyNDA5MH0.fT-aSJJ_CI5Sc8QAzeBPc4WZM_6nXErB1PuYRnmaJLQ"
-    barilgiinId  = "698402e26bb3e94b5665bfe5"
+    url          = "http://103.143.40.175:8081/zogsoolSdkService"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDgwOWZmYWUzZjdlY2MyZTVmY2Q1NyIsIm5lciI6IlJlY2VwdGlvbiIsImJhaWd1dWxsYWdpaW5JZCI6IjY2MmRlOGM4OTE5YTM2OTVmZmU1MWUzNiIsImlhdCI6MTc3NDU3MDQ4OX0.OGMzL_qXyY_v_12RprpggCzAPqYpQKnHy2ZXteiCDRA"
+    barilgiinId  = "662de8c8919a3695ffe51e37"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,19 +11,25 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Улаанбаатар буян"
+    org_name = "NM Tower"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "172.16.19.195"
-    password = "admin123"
-    http_port = 80
+    ip       = "192.168.1.201"
+    password = "Admin123"
+    http_port = 443
+    gate = "entrance"
+    sambar_type = "sambar"
+    [[cameras]]
+    ip       = "192.168.1.203"
+    password = "Admin123"
+    http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
     
     [[cameras]]
-    ip       = "172.16.19.196"
-    password = "admin123"
+    ip       = "192.168.1.202"
+    password = "Admin123"
     http_port = 443
     gate = "exit"
     sambar_type = "sambar"
