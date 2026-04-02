@@ -58,14 +58,23 @@ async fn neeye(Path(ip): Path<String>) -> impl IntoResponse {
     }
 }
 
+/// 200 болон 201 нэг дэлгэц ашигладаг — аль нэг ирвэл хоёулд нь явуулна
+fn shared_sambar_ips(ip: &str) -> Vec<String> {
+    if ip == "192.168.1.200" || ip == "192.168.1.201" {
+        vec!["192.168.1.200".to_string(), "192.168.1.201".to_string()]
+    } else {
+        vec![ip.to_string()]
+    }
+}
+
 /// LED screen display — HTTP configManager.cgi
 async fn sambar(Path((ip, text, dun)): Path<(String, String, String)>) -> impl IntoResponse {
     println!("sambar called for ip: {ip} text: {text} dun: {dun}");
 
-    let (password, is_entrance, org_name, company_name) = CAMERA_MANAGER
+    let (_, is_entrance, org_name, company_name) = CAMERA_MANAGER
         .get()
-        .map(|m| (m.password_for_ip(&ip), m.is_entrance(&ip), m.org_name().to_string(),   m.company_name().to_string(),))
-       .unwrap_or(("admin123".to_string(), false, "ParkEase".to_string(), "ParkEase".to_string()));
+        .map(|m| (m.password_for_ip(&ip), m.is_entrance(&ip), m.org_name().to_string(), m.company_name().to_string()))
+        .unwrap_or(("admin123".to_string(), false, "ParkEase".to_string(), "ParkEase".to_string()));
 
     let dun_t = format!("{}T", dun);
     let line1 = if is_entrance { org_name.clone() } else { dun_t.clone() };
@@ -74,33 +83,37 @@ async fn sambar(Path((ip, text, dun)): Path<(String, String, String)>) -> impl I
     let params = [
         "TrafficLatticeScreen[0].StatusChangeTime=1".to_string(),
         format!("TrafficLatticeScreen[0].Normal.Contents.[0]=str({text})"),
-        format!("TrafficLatticeScreen[0].Normal.Contents.[1]=str({line1})"), 
+        format!("TrafficLatticeScreen[0].Normal.Contents.[1]=str({line1})"),
         format!("TrafficLatticeScreen[0].Normal.Contents.[2]=str({line2})"),
         format!("TrafficLatticeScreen[0].CarPass.Contents.[0]=str({carpass_0})"),
         "TrafficLatticeScreen[0].CarPass.Contents.[1]=SysTime".to_string(),
     ];
+    let query = params.join("&");
 
-    let port = CAMERA_MANAGER.get()
-    .and_then(|m| m.http_port_for_ip(&ip))
-    .unwrap_or(80);
-    let scheme = if port == 443 { "https" } else { "http" };
+    let target_ips = shared_sambar_ips(&ip);
+    let mut any_ok = false;
 
-    let url = format!(
-        "{scheme}://{ip}/cgi-bin/configManager.cgi?action=setConfig&{}",
-        params.join("&")
-    );
+    for target in &target_ips {
+        let password = CAMERA_MANAGER.get()
+            .map(|m| m.password_for_ip(target))
+            .unwrap_or_else(|| "admin123".to_string());
+        let port = CAMERA_MANAGER.get()
+            .and_then(|m| m.http_port_for_ip(target))
+            .unwrap_or(80);
+        let scheme = if port == 443 { "https" } else { "http" };
+        let url = format!("{scheme}://{target}/cgi-bin/configManager.cgi?action=setConfig&{query}");
+        println!("[SAMBAR] URL: {url}");
 
-    println!("[SAMBAR] URL: {url}");
-
-    match send_sambar_request(&url, &password).await {
-        Ok(body) => {
-            println!("sambar response: {body}");
-            (StatusCode::OK, "Amjilttai".to_string())
+        match send_sambar_request(&url, &password).await {
+            Ok(body) => { println!("sambar response ({target}): {body}"); any_ok = true; }
+            Err(e)   => { println!("sambar Aldaa ({target}): {e}"); }
         }
-        Err(e) => {
-            println!("sambar Aldaa: {e}");
-            (StatusCode::INTERNAL_SERVER_ERROR, "aldaa".to_string())
-        }
+    }
+
+    if any_ok {
+        (StatusCode::OK, "Amjilttai".to_string())
+    } else {
+        (StatusCode::INTERNAL_SERVER_ERROR, "aldaa".to_string())
     }
 }
 
@@ -109,13 +122,7 @@ async fn sambar_ognootoi(
 ) -> impl IntoResponse {
     println!("sambarOgnootoi called for ip: {ip} text: {text} dun: {dun} start: {start} end: {end}");
 
-    let password = CAMERA_MANAGER
-        .get()
-        .map(|m| m.password_for_ip(&ip))
-        .unwrap_or_else(|| "admin123".to_string());
-
     let dun_t = format!("{}T", dun);
-
     let params = [
         "TrafficLatticeScreen[0].StatusChangeTime=1".to_string(),
         format!("TrafficLatticeScreen[0].Normal.Contents.[0]=str({text})"),
@@ -127,28 +134,32 @@ async fn sambar_ognootoi(
         "TrafficLatticeScreen[0].CarPass.Contents.[2]=str()".to_string(),
         "TrafficLatticeScreen[0].CarPass.Contents.[3]=SysTime".to_string(),
     ];
+    let query = params.join("&");
 
-    let port = CAMERA_MANAGER.get()
-    .and_then(|m| m.http_port_for_ip(&ip))
-    .unwrap_or(80);
-    let scheme = if port == 443 { "https" } else { "http" };
+    let target_ips = shared_sambar_ips(&ip);
+    let mut any_ok = false;
 
-    let url = format!(
-        "{scheme}://{ip}/cgi-bin/configManager.cgi?action=setConfig&{}",
-        params.join("&")
-    );
+    for target in &target_ips {
+        let password = CAMERA_MANAGER.get()
+            .map(|m| m.password_for_ip(target))
+            .unwrap_or_else(|| "admin123".to_string());
+        let port = CAMERA_MANAGER.get()
+            .and_then(|m| m.http_port_for_ip(target))
+            .unwrap_or(80);
+        let scheme = if port == 443 { "https" } else { "http" };
+        let url = format!("{scheme}://{target}/cgi-bin/configManager.cgi?action=setConfig&{query}");
+        println!("[SAMBAR_OGNOOTOI] URL: {url}");
 
-    println!("[SAMBAR_OGNOOTOI] URL: {url}");
-
-    match send_sambar_request(&url, &password).await {
-        Ok(body) => {
-            println!("sambarOgnootoi response: {body}");
-            (StatusCode::OK, "Amjilttai".to_string())
+        match send_sambar_request(&url, &password).await {
+            Ok(body) => { println!("sambarOgnootoi response ({target}): {body}"); any_ok = true; }
+            Err(e)   => { println!("sambarOgnootoi Aldaa ({target}): {e}"); }
         }
-        Err(e) => {
-            println!("sambarOgnootoi Aldaa: {e}");
-            (StatusCode::INTERNAL_SERVER_ERROR, "aldaa".to_string())
-        }
+    }
+
+    if any_ok {
+        (StatusCode::OK, "Amjilttai".to_string())
+    } else {
+        (StatusCode::INTERNAL_SERVER_ERROR, "aldaa".to_string())
     }
 }
 async fn send_sambar_request(url: &str, password: &str) -> anyhow::Result<String> {

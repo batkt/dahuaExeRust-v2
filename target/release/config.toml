@@ -1,7 +1,7 @@
     [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWU1NzBhYzczYjQyMTBlZmM4YzkxNyIsIm5lciI6ItCR0LDRgNGD0YPQvdCx0q_RgSIsImJhaWd1dWxsYWdpaW5JZCI6IjY5OWU1NzBhYzczYjQyMTBlZmM4YzkxNCIsImlhdCI6MTc3NDU3NzIwOX0.BPcK2O1wPd6-V1hBtIHxXWakxUlPoBv1EPEMCFnyomc"
-    barilgiinId  = "699e570ac73b4210efc8c915"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmNjMjI1NzMwNmNlZjBmNzYyZjQ4ZSIsIm5lciI6IlpldnRhYnM2NDgxNTIzIiwiYmFpZ3V1bGxhZ2lpbklkIjoiNjExNWYzNTBiMzU2ODljZGJmMWI5ZGEzIiwiaWF0IjoxNzc0NDgzMzM5fQ.K_y4fEyU805Y_QiJxpPg5_aReUHZa9Ft0lO_DFdsGRY"
+    barilgiinId  = "619e267fdd4835aa2c168b28"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,17 +11,35 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Энхжин төв"
+    org_name = "Их наяд"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "172.16.19.211"
+    ip       = "192.168.1.200"
     password = "admin123"
     http_port = 443
     gate = "entrance"
-    sambar_type = "sambar" 
+    sambar_type = "sambar"
     [[cameras]]
-    ip       = "172.16.19.210"
+    ip       = "192.168.1.201"
+    password = "admin123"
+    http_port = 443
+    gate = "entrance"
+    sambar_type = "sambar"
+    [[cameras]]
+    ip       = "192.168.1.206"
+    password = "admin123"
+    http_port = 80
+    gate = "exit"
+    sambar_type = "sambar"
+    [[cameras]]
+    ip       = "192.168.1.204"
+    password = "admin123"
+    http_port = 443
+    gate = "exit"
+    sambar_type = "sambar"
+    [[cameras]]
+    ip       = "192.168.1.205"
     password = "admin123"
     http_port = 443
     gate = "exit"
