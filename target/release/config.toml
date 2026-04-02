@@ -1,7 +1,7 @@
-     [server]
+    [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2I4OTQzN2I2YWMyOTk5NDU3NmY1YiIsIm5lciI6ItCT0JDQndCi06jQnNOo0KAg0JHQr9Cc0JHQkNCU0J7QoNCWIiwiYmFpZ3V1bGxhZ2lpbklkIjoiNjljYjg5NDM3YjZhYzI5OTk0NTc2ZjU4IiwiaWF0IjoxNzc1MDIzMzQyfQ.8GVehZeKY_29hFD-vbhrbNocwyPcPtIXekCVPYYhj_g"
-    barilgiinId  = "69cb89437b6ac29994576f59"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjVhOTk4YjcyYTM1MzIxZWJkYmQ4YSIsIm5lciI6ItCa0JDQotCV0KDQmNCd0JMg0JDQodCi0KDQkCIsImJhaWd1dWxsYWdpaW5JZCI6IjY3YjVhOTk4YjcyYTM1MzIxZWJkYmQ4NyIsInNhbGJhcnV1ZCI6W3sic2FsYmFyaWluSWQiOiI2N2I1YTk5OGI3MmEzNTMyMWViZGJkODgiLCJkdXVzYWtoT2dub28iOiIyMDI2LTA0LTA1VDE1OjU5OjU5LjAwMFoifV0sImR1dXNha2hPZ25vbyI6IjIwMjYtMDQtMDVUMTU6NTk6NTkuMDAwWiIsImlhdCI6MTc3NDI1MDMzNCwiZXhwIjoxNzc0ODU1MTM0fQ.ugGucBqMKyumMlLePiaBKF_9jjspGNrQ7Zmn5aZUP1I"
+    barilgiinId  = "67b5a998b72a35321ebdbd88"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,19 +11,18 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Homeplaza"
+    org_name = "Astra"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.1.80"
-    password = "admin123"
+    ip       = "192.168.1.56"
+    password = "asdf1234"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
-
     [[cameras]]
-    ip       = "192.168.1.81"
-    password = "admin123"
+    ip       = "192.168.1.55"
+    password = "asdf1234"
     http_port = 443
     gate = "exit"
     sambar_type = "sambar"
