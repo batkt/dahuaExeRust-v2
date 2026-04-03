@@ -17,9 +17,13 @@ static LAST_PLATE: Lazy<Mutex<HashMap<String, Instant>>> = Lazy::new(|| Mutex::n
 /// Start plate listener for one camera — runs forever, reconnects on error
 pub async fn run_plate_listener(ip: String, password: String, port: u16, plate_tx: mpsc::Sender<PlateEvent>) {
     let scheme = if port == 443 { "https" } else { "http" };
+    let host = if (scheme == "http" && port == 80) || (scheme == "https" && port == 443) {
+        ip.clone()
+    } else {
+        format!("{ip}:{port}")
+    };
     let url = format!(
-        "{scheme}://{}:{}/cgi-bin/snapManager.cgi?action=attachFileProc&Flags[0]=Event&Events=[TrafficJunction]&heartbeat=5",
-        ip, port
+        "{scheme}://{host}/cgi-bin/snapManager.cgi?action=attachFileProc&Flags[0]=Event&Events=[TrafficJunction]&heartbeat=5"
     );
     let mut consecutive_failures: u32 = 0;
 
@@ -113,7 +117,7 @@ async fn connect_and_read(
                     let now = Instant::now();
                     let mut map = LAST_PLATE.lock().unwrap();
                     if let Some(last) = map.get(&key) {
-                        if now.duration_since(*last).as_secs() < 3 {
+                        if now.duration_since(*last).as_secs() < 10 {
                             println!("[{ip}] Давхардсан plate давсан: {plate}");
                             continue;
                         }

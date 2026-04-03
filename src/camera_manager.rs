@@ -31,11 +31,12 @@ unsafe impl Send for CameraState {}
 unsafe impl Sync for CameraState {}
 
 pub struct CameraManager {
-    handle_map: Arc<Mutex<HashMap<String, HANDLE>>>,
-    cameras:    Arc<Mutex<Vec<CameraState>>>,
-    sdk_cfg:    SdkConfig,
-    cam_cfg:    Vec<CameraEntry>,
-    pub plate_tx: mpsc::Sender<PlateEvent>,
+    handle_map:     Arc<Mutex<HashMap<String, HANDLE>>>,
+    cameras:        Arc<Mutex<Vec<CameraState>>>,
+    reconnect_lock: Arc<Mutex<()>>,
+    sdk_cfg:        SdkConfig,
+    cam_cfg:        Vec<CameraEntry>,
+    pub plate_tx:   mpsc::Sender<PlateEvent>,
 }
 
 unsafe impl Send for CameraManager {}
@@ -44,10 +45,11 @@ unsafe impl Sync for CameraManager {}
 impl CameraManager {
     pub fn new(cfg: &Config, plate_tx: mpsc::Sender<PlateEvent>) -> Self {
         Self {
-            handle_map: Arc::new(Mutex::new(HashMap::new())),
-            cameras:    Arc::new(Mutex::new(Vec::new())),
-            sdk_cfg:    cfg.sdk.clone(),
-            cam_cfg:    cfg.cameras.clone(),
+            handle_map:     Arc::new(Mutex::new(HashMap::new())),
+            cameras:        Arc::new(Mutex::new(Vec::new())),
+            reconnect_lock: Arc::new(Mutex::new(())),
+            sdk_cfg:        cfg.sdk.clone(),
+            cam_cfg:        cfg.cameras.clone(),
             plate_tx,
         }
     }
@@ -234,6 +236,8 @@ impl CameraManager {
     }
 
     fn reconnect_single(&self, ip: &str) {
+        let _guard = self.reconnect_lock.lock().unwrap();
+
         let sdk = match DahuaSdk::load() { Ok(s) => s, Err(_) => return };
         let password = {
             self.cam_cfg.iter()

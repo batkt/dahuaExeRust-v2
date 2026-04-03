@@ -179,20 +179,7 @@ async fn run_app(cfg: Config) -> anyhow::Result<()> {
         });
     }
 
-    // 6. Heartbeat loop
-    let heartbeat_interval = cfg.sdk.heartbeat_interval_secs;
-    tokio::spawn(async move {
-        loop {
-            tokio::time::sleep(Duration::from_secs(heartbeat_interval)).await;
-            tokio::task::spawn_blocking(|| {
-                if let Some(mgr) = CAMERA_MANAGER.get() {
-                    mgr.heartbeat();
-                }
-            });
-        }
-    });
-
-    // 7. API server
+    // 6. API server
     tokio::spawn(api::run_api_server(5000));
 
     // 8. Plate event processor

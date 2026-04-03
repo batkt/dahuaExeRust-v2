@@ -72,10 +72,11 @@ impl PlateService {
 
         let status = resp.status();
         let text   = resp.text().await.unwrap_or_default();
-        println!("Server raw response: {text}");
+        println!("Server raw response ({status}): {text}");
 
-        // Always return Ok — gate is opened only via /api/neeye
-        let _ = status;
+        if !status.is_success() {
+            anyhow::bail!("Server returned {status}: {text}");
+        }
         Ok(())
     }
 }
