@@ -104,12 +104,12 @@ impl CameraManager {
     pub fn startup_and_connect(&self) -> anyhow::Result<()> {
         let sdk = DahuaSdk::load()?;
 
-        println!("Dahua SDK initialize хийж байна...");
+        log::info!("SDK | initialize хийж байна...");
         let ret = unsafe { (sdk.init_ex)(None, std::ptr::null_mut(), std::ptr::null_mut()) };
         if ret == 0 {
             anyhow::bail!("CLIENT_InitEx failed");
         }
-        println!("Dahua SDK амжилттай аслаа");
+        log::info!("SDK | амжилттай аслаа");
 
         unsafe {
             (sdk.set_connect_time)(
@@ -131,22 +131,21 @@ impl CameraManager {
         cams.clear();
 
         for cam in &self.cam_cfg {
-            println!("Camera холбож байна: {} ...", cam.ip);
+            log::info!("SDK | camera холбож байна: {}", cam.ip);
 
             let handle = Self::connect_with_retry_inner(sdk, &cam.ip, &cam.password, &self.sdk_cfg);
             if handle.is_null() {
-                error!("Camera холбогдсонгүй: {}", cam.ip);
+                log::error!("SDK | camera холбогдсонгүй: {}", cam.ip);
                 continue;
             }
 
-            println!("Camera амжилттай холбогдлоо: {}", cam.ip);
+            log::info!("SDK | camera амжилттай холбогдлоо: {}", cam.ip);
             map.insert(cam.ip.clone(), handle);
             cams.push(CameraState {
                 handle,
                 ip:       cam.ip.clone(),
                 password: cam.password.clone(),
             });
-            println!("Бүртгэгдсэн Camera count: {}", cams.len());
         }
     }
 
@@ -206,9 +205,7 @@ impl CameraManager {
             )
         };
         let err = unsafe { (sdk.get_last_error)() };
-        if ret != 0 {
-            log::info!("GATE OK    | ip={ip}");
-        } else {
+        if ret == 0 {
             log::error!("GATE FAIL  | ip={ip} err={err:#x} — reconnecting");
         }
 
@@ -228,9 +225,7 @@ impl CameraManager {
                         5000,
                     )
                 };
-                if ret2 != 0 {
-                    log::info!("GATE RETRY OK   | ip={ip}");
-                } else {
+                if ret2 == 0 {
                     log::error!("GATE RETRY FAIL | ip={ip}");
                 }
                 return ret2 != 0;
@@ -283,38 +278,33 @@ impl CameraManager {
         }
     }
 
-    pub fn heartbeat(&self) {
-        let ips_to_check: Vec<(String, HANDLE)> = {
-            let cams = self.cameras.lock().unwrap();
-            cams.iter().map(|c| (c.ip.clone(), c.handle)).collect()
+    pub fn check_sdk_connections(&self) {
+        let ips_to_check: Vec<String> = {
+            self.cam_cfg.iter().map(|c| c.ip.clone()).collect()
         };
 
         let sdk_port = self.sdk_cfg.port;
 
-        for (ip, handle) in ips_to_check {
-            if handle.is_null() {
-                println!("Камер тасарсан ({ip}) — дахин холбогдож байна");
+        for ip in ips_to_check {
+            let handle = self.handle_for_ip(&ip);
+
+            if handle.map(|h| h.is_null()).unwrap_or(true) {
+                log::error!("SDK HEARTBEAT | no handle for {ip} — reconnecting");
                 self.reconnect_single(&ip);
                 continue;
             }
 
-            // Real TCP connectivity check — a non-null handle can still be stale
             let addr = format!("{ip}:{sdk_port}");
             let reachable = match addr.parse::<std::net::SocketAddr>() {
                 Ok(sock_addr) => std::net::TcpStream::connect_timeout(
                     &sock_addr,
                     std::time::Duration::from_secs(3),
                 ).is_ok(),
-                Err(_) => {
-                    warn!("Буруу хаяг: {addr}");
-                    false
-                }
+                Err(_) => false,
             };
 
-            if reachable {
-                println!("Холбоот байна ({ip})");
-            } else {
-                println!("Камер хүрэхгүй байна ({ip}) — дахин холбогдож байна");
+            if !reachable {
+                log::error!("SDK HEARTBEAT | {ip} unreachable — reconnecting");
                 self.reconnect_single(&ip);
             }
         }

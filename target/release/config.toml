@@ -1,7 +1,7 @@
     [server]
-    url          = "http://103.143.40.175:8081/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NWM1NzUyMWE4YTRhZWJjMWQ2NWIwNSIsIm5lciI6IkNBZG1pbiIsImJhaWd1dWxsYWdpaW5JZCI6IjY5NWM1NzUxMWE4YTRhZWJjMWQ2NWIwMiIsImlhdCI6MTc3NTM5NzUxN30.VTPqXUz8RKMm_YGP12kxNWpsRlIqT4tjPiXvzEBVrHs"
-    barilgiinId  = "695c57511a8a4aebc1d65b03"
+    url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmVlNzRiYTI5NTQ5Mzc0YmM0MDI0OCIsIm5lciI6ItCl0L7QvdCz0L7RgNC30YPQuyIsImJhaWd1dWxsYWdpaW5JZCI6IjY2MmVlNzRiYTI5NTQ5Mzc0YmM0MDI0NSIsImlhdCI6MTc3NTIxNTUyOH0.uL--FKBcVLsEwogPFLPBJt1nMpwfUbAL_nIP3zTq6Mk"
+    barilgiinId  = "662ee74ba29549374bc40246"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,14 +11,19 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Homeplaza"
+    org_name = "ИХ ТОЙРУУ"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.1.21"
+    ip       = "192.168.0.89"
     password = "admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
-
+    [[cameras]]
+    ip       = "192.168.0.90"
+    password = "admin123"
+    http_port = 443
+    gate = "exit"
+    sambar_type = "sambar"
     

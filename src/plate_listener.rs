@@ -56,8 +56,7 @@ async fn connect_and_read(
     consecutive_failures: &mut u32,
 ) -> anyhow::Result<()> {
     let client = reqwest::Client::builder()
-    .timeout(std::time::Duration::from_secs(90))
-    .danger_accept_invalid_certs(true)  // ← нэм
+    .danger_accept_invalid_certs(true)
     .build()?;
 
     // First request — get WWW-Authenticate header

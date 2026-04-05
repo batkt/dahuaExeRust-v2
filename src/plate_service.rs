@@ -37,9 +37,8 @@ impl PlateService {
             barilgiin_id:   &self.cfg.barilgiin_id,
         };
 
-        log::info!("PLATE SEND | plate={} camera={}", event.plate, event.camera_ip);
         match self.send_with_retry(&payload).await {
-            Ok(_)  => log::info!("PLATE OK   | plate={} camera={}", event.plate, event.camera_ip),
+            Ok(_)  => {},
             Err(e) => log::error!("PLATE FAIL | plate={} camera={} err={e}", event.plate, event.camera_ip),
         }
     }

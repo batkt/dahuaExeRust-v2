@@ -179,7 +179,19 @@ async fn run_app(cfg: Config) -> anyhow::Result<()> {
         });
     }
 
-    // 6. API server
+    // 6. SDK heartbeat — checks gate connection every 60s, reconnects if dead
+    tokio::spawn(async move {
+        loop {
+            tokio::time::sleep(Duration::from_secs(60)).await;
+            let _ = tokio::task::spawn_blocking(|| {
+                if let Some(mgr) = CAMERA_MANAGER.get() {
+                    mgr.check_sdk_connections();
+                }
+            }).await;
+        }
+    });
+
+    // 7. API server
     tokio::spawn(api::run_api_server(5000));
 
     // 8. Plate event processor
