@@ -1,7 +1,7 @@
     [server]
-    url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmVlNzRiYTI5NTQ5Mzc0YmM0MDI0OCIsIm5lciI6ItCl0L7QvdCz0L7RgNC30YPQuyIsImJhaWd1dWxsYWdpaW5JZCI6IjY2MmVlNzRiYTI5NTQ5Mzc0YmM0MDI0NSIsImlhdCI6MTc3NTIxNTUyOH0.uL--FKBcVLsEwogPFLPBJt1nMpwfUbAL_nIP3zTq6Mk"
-    barilgiinId  = "662ee74ba29549374bc40246"
+    url          = "http://103.143.40.230:8081/zogsoolSdkService"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YWJjMjI1MTAyMjhhNzQ1NGJkZjVlZCIsIm5lciI6ItCc0LDRgNCz0LDQtCDRiNC40LvRgtCz0Y3RjdC9INGC0LHQsSIsImJhaWd1dWxsYWdpaW5JZCI6IjY4YWJjMjI0MTAyMjhhNzQ1NGJkZjVlOSIsImlhdCI6MTc3Mzk3MDg4MX0.s9BwQF1FUgqxFfbaqKKSeBkPNuEn6TupTLNvxOm7BjI"
+    barilgiinId  = "68abc22410228a7454bdf5ea"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,19 +11,26 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "ИХ ТОЙРУУ"
+    org_name = "Grand Plaza"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.0.89"
+    ip       = "192.168.1.110"
     password = "admin123"
-    http_port = 443
+    http_port = 80
     gate = "entrance"
-    sambar_type = "sambar"
     [[cameras]]
-    ip       = "192.168.0.90"
+    ip       = "192.168.1.109"
     password = "admin123"
-    http_port = 443
+    http_port = 80
+    gate = "entrance"
+    [[cameras]]
+    ip       = "192.168.1.111"
+    password = "admin123"
+    http_port = 80
     gate = "exit"
-    sambar_type = "sambar"
-    
+    [[cameras]]
+    ip       = "192.168.1.108"
+    password = "admin123"
+    http_port = 80
+    gate = "exit"
