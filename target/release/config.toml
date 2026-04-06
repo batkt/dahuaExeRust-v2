@@ -1,7 +1,7 @@
     [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTI1MDQ4OTRiZDIyYzUxMDZiOWM1NiIsIm5lciI6IlpldnRhYnMiLCJiYWlndXVsbGFnaWluSWQiOiI2M2MwZjMxZWZlNTIyMDQ4YmYwMjA4NmQiLCJpYXQiOjE3NzQ0ODQxMzh9.dnT9gwY0pqkXmHhHXzNT-7dG1w7KtULzK6eoFVCLCxQ"
-    barilgiinId  = "6417dd077ea800d9021a2365"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGU0NzQ2ZDYwMzQyN2Y4ZDY2NGJiNSIsIm5lciI6IuKAnNCm0K3Qk9Cm4oCdINCl0KXQmiIsImJhaWd1dWxsYWdpaW5JZCI6IjY5NGU0NzQ2ZDYwMzQyN2Y4ZDY2NGJiMSIsImlhdCI6MTc3NTQ4Njg0MH0.PaaoMDDWyV6UBwS8GF3KO---WN05WKeHlTLXCIhI0LY"
+    barilgiinId  = "694e4746d603427f8d664bb2"
     timeout_secs = 30
     retry_count  = 3
 
@@ -11,40 +11,18 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Food city"
+    org_name = "Хүүхдийн зуу (Хаан банк)"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.2.75"
-    password = "admin123"
+    ip       = "192.168.8.120"
+    password = "Admin123"
     http_port = 80
     gate = "entrance"
     sambar_type = "sambar"
-
     [[cameras]]
-    ip       = "192.168.2.234"
-    password = "admin123"
-    http_port = 80
-    gate = "entrance"
-    sambar_type = "sambar"
-
-    [[cameras]]
-    ip       = "192.168.2.76"
-    password = "admin123"
-    http_port = 80
-    gate = "exit"
-    sambar_type = "sambar"
-
-    [[cameras]]
-    ip       = "192.168.2.236"
-    password = "food2345"
-    http_port = 80
-    gate = "exit"
-    sambar_type = "sambar"
-
-    [[cameras]]
-    ip       = "192.168.2.237"
-    password = "admin123"
+    ip       = "192.168.8.121"
+    password = "Admin123"
     http_port = 80
     gate = "exit"
     sambar_type = "sambar"
