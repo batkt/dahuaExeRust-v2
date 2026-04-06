@@ -1,6 +1,6 @@
     [server]
     url          = "https://turees.zevtabs.mn/api/zogsoolSdkService"
-    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmNjMjI1NzMwNmNlZjBmNzYyZjQ4ZSIsIm5lciI6IlpldnRhYnM2NDgxNTIzIiwiYmFpZ3V1bGxhZ2lpbklkIjoiNjExNWYzNTBiMzU2ODljZGJmMWI5ZGEzIiwiaWF0IjoxNzc0NTc4MTAxfQ.cW34j5mLqMwEpNMS42MgTBeTEtWzUmqjEkutcGw29dk"
+    token        = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmNjMjI1NzMwNmNlZjBmNzYyZjQ4ZSIsIm5lciI6IlpldnRhYnM2NDgxNTIzIiwiYmFpZ3V1bGxhZ2lpbklkIjoiNjExNWYzNTBiMzU2ODljZGJmMWI5ZGEzIiwiaWF0IjoxNzc0NDgzMzM5fQ.K_y4fEyU805Y_QiJxpPg5_aReUHZa9Ft0lO_DFdsGRY"
     barilgiinId  = "619e267fdd4835aa2c168b28"
     timeout_secs = 30
     retry_count  = 3
@@ -11,33 +11,41 @@
     connect_timeout_ms      = 5000
     max_connect_retries     = 5
     port                    = 37777
-    org_name = "Их Наяд"
+    org_name = "Их наяд"
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "192.168.1.128"
+    ip       = "192.168.1.200"
     password = "admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
     sambar_group = "entrance_screen"
     [[cameras]]
-    ip       = "192.168.1.232"
+    ip       = "192.168.1.201"
     password = "admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar"
     sambar_group = "entrance_screen"
     [[cameras]]
-    ip       = "192.168.1.229"
+    ip       = "192.168.1.206"
     password = "admin123"
-    http_port = 443
+    http_port = 80
     gate = "exit"
     sambar_type = "sambar"
     [[cameras]]
-    ip       = "192.168.1.231"
+    ip       = "192.168.1.204"
     password = "admin123"
     http_port = 443
     gate = "exit"
     sambar_type = "sambar"
+    sambar_group = "exit_screen"
+    [[cameras]]
+    ip       = "192.168.1.205"
+    password = "admin123"
+    http_port = 443
+    gate = "exit"
+    sambar_type = "sambar"
+    sambar_group = "exit_screen"
     
