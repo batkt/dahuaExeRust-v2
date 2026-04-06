@@ -15,26 +15,16 @@
     company_name = "ParkEase"
 
     [[cameras]]
-    ip       = "172.16.19.134"
+    ip       = "192.168.1.108"
     password = "admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar" 
     [[cameras]]
-    ip       = "172.16.19.130"
+    ip       = "192.168.1.109"
     password = "admin123"
     http_port = 443
     gate = "entrance"
     sambar_type = "sambar" 
-    [[cameras]]
-    ip       = "172.16.19.131"
-    password = "admin123"
-    http_port = 443
-    gate = "exit"
-    sambar_type = "sambar"
-    [[cameras]]
-    ip       = "172.16.19.132"
-    password = "admin123"
-    http_port = 443
-    gate = "exit"
-    sambar_type = "sambar"
+   
+    
